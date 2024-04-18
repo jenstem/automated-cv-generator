@@ -39,6 +39,15 @@ class PDFCV(FPDF):
         for skill in skills:
             self.cell(0, 5, "- {}".format(skill), new_x="LMARGIN", new_y="NEXT", align="L")
 
+        # Display work experience
+        self.ln(10)
+        self.set_font("Arial", style="B", size=16)
+        self.cell(0, 10, "Work Experience", new_x="LMARGIN", new_y="NEXT", align="L")
+
+        # Display details of work experience
+        self.set_font("Arial", style="", size=12)
+        for experience in work_experience:
+            self.cell(0, 5, "{}:  {}, {}".format(experience["title"], experience["company"], experience["year"]), new_x="LMARGIN", new_y="NEXT", align="L")
 
 
 
