@@ -1,5 +1,6 @@
 from tkinter import *
-
+import pyqrcode
+from fpdf import FPDF
 
 # Function to generate CV
 def generate_cv():
@@ -24,6 +25,10 @@ def generate_cv():
         work_experience.append({'title': title.strip(), 'company': company.strip(), 'year': year.strip()})
 
     about_me = entry_about_me.get("1.0", END).strip()
+
+# QR Code
+    qrcode = pyqrcode.create(website)
+    qrcode.png("mywebsite.png", scale=6)
 
 
 root = Tk()
