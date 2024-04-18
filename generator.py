@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 import pyqrcode
 from fpdf import FPDF
 
@@ -29,6 +30,11 @@ def generate_cv():
 # QR Code
     qrcode = pyqrcode.create(website)
     qrcode.png("mywebsite.png", scale=6)
+
+    # Validate the input
+    if not name or not email or not phone or not address or not website or not skills or not education or not work_experience or not about_me:
+        messagebox.showerror("Error", "Please fill in all fields")
+        return
 
 
 root = Tk()
