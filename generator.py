@@ -12,7 +12,24 @@ class PDFCV(FPDF):
         pass
 
     def generate_cv(self, name, email, phone, address, website, skills, education, work_experience, about_me):
-        pass
+        self.add_page()
+        self.ln(20)
+
+        # Display the name
+        self.set_font("Arial", style="B", size=26)
+        self.cell(0, 10, name, new_x="LMARGIN", new_y="NEXT", align="C")
+
+        # Display the contact information header
+        self.set_font("Arial", style="B", size=16)
+        self.cell(0, 10, "Contact Information", new_x="LMARGIN", new_y="NEXT", align="L")
+
+        # Display details of contact information
+        self.set_font("Arial", style="", size=12)
+        self.cell(0, 5, "Email: {}".format(email), new_x="LMARGIN", new_y="NEXT", align="L")
+        self.cell(0, 5, "Phone Number: {}".format(phone), new_x="LMARGIN", new_y="NEXT", align="L")
+        self.cell(0, 5, "Address: {}".format(address), new_x="LMARGIN", new_y="NEXT", align="L")
+
+        self.output("cv1.pdf")
 
 
 # Function to generate CV
