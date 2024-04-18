@@ -29,6 +29,20 @@ class PDFCV(FPDF):
         self.cell(0, 5, "Phone Number: {}".format(phone), new_x="LMARGIN", new_y="NEXT", align="L")
         self.cell(0, 5, "Address: {}".format(address), new_x="LMARGIN", new_y="NEXT", align="L")
 
+        # Display skills
+        self.ln(10)
+        self.set_font("Arial", style="B", size=16)
+        self.cell(0, 10, "Skills", new_x="LMARGIN", new_y="NEXT", align="L")
+
+        # Display details of skills
+        self.set_font("Arial", style="", size=12)
+        for skill in skills:
+            self.cell(0, 5, "- {}".format(skill), new_x="LMARGIN", new_y="NEXT", align="L")
+
+
+
+
+
         self.output("cv1.pdf")
 
 
