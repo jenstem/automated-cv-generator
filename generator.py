@@ -8,10 +8,7 @@ class PDFCV(FPDF):
     def header(self):
         self.image("mywebsite.png", 10, 8, 33, title="Portfolio Site")
 
-    def footer(self):
-        pass
-
-    def generate_cv(self, name, email, phone, address, website, skills, education, work_experience, about_me):
+    def generate_cv(self, name, email, phone, address, skills, education, work_experience, about_me):
         self.add_page()
         self.ln(20)
 
@@ -57,7 +54,7 @@ class PDFCV(FPDF):
         # Display details of education
         self.set_font("Arial", style="", size=12)
         for education_item in education:
-            self.cell(0, 5, "{}:  {}, {}".format(education_item["degree"], education_item["school"], education_item["year"]), new_x="LMARGIN", new_y="NEXT", align="L")
+            self.cell(0, 5, "{}, {}, {}".format(education_item['degree'], education_item['school'], education_item['year']), new_x="LMARGIN", new_y="NEXT", align="L")
 
         # Display about me
         self.ln(10)
@@ -78,10 +75,10 @@ def generate_cv():
     phone = entry_phone.get()
     address = entry_address.get()
     website = entry_website.get()
+    skills = entry_skills.get("1.0", END).strip().split('\n')
     work_experience = []
     education = []
 
-    skills = entry_skills.get("1.0", END).strip().split('\n')
 
     education_lines = entry_education.get("1.0", END).strip().split('\n')
     for line in education_lines:
@@ -99,12 +96,14 @@ def generate_cv():
     qrcode = pyqrcode.create(website)
     qrcode.png("mywebsite.png", scale=6)
 
-    if not name or not email or not phone or not address or not website or not skills or not education or not work_experience or not about_me:
+    if not name or not email or not phone or not address or not skills or not education or not work_experience or not about_me:
         messagebox.showerror("Error", "Please fill in all fields")
         return
 
     cv = PDFCV()
-    cv.generate_cv(name, email, phone, address, website, skills, education, work_experience, about_me)
+    cv.generate_cv(name, email, phone, address, skills, education, work_experience, about_me)
+
+    messagebox.showinfo("Success", "CV generated successfully!")
 
 
 
@@ -155,14 +154,14 @@ entry_skills.pack()
 
 
 # Education
-label_education = Label(root, text="Education (Enter one per line in format 'Degree: School, Year')")
+label_education = Label(root, text="Education (Enter one per line in format: 'Degree, School, Year')")
 label_education.pack()
 entry_education = Text(root, height=5)
 entry_education.pack()
 
 
 # Work Experience
-label_experience = Label(root, text="Experience (Enter one per line in format 'Job Title, Company, Year')")
+label_experience = Label(root, text="Experience (Enter one per line in format: 'Job Title, Company, Year')")
 label_experience.pack()
 entry_experience = Text(root, height=5)
 entry_experience.pack()
