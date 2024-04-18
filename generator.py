@@ -3,6 +3,18 @@ from tkinter import messagebox
 import pyqrcode
 from fpdf import FPDF
 
+
+class PDFCV(FPDF):
+    def header(self):
+        self.image("mywebsite.png", 10, 8, 33, title="Portfolio Site")
+
+    def footer(self):
+        pass
+
+    def generate_cv(self, name, email, phone, address, website, skills, education, work_experience, about_me):
+        pass
+
+
 # Function to generate CV
 def generate_cv():
     name = entry_name.get()
@@ -27,14 +39,17 @@ def generate_cv():
 
     about_me = entry_about_me.get("1.0", END).strip()
 
-# QR Code
+    # QR Code
     qrcode = pyqrcode.create(website)
     qrcode.png("mywebsite.png", scale=6)
 
-    # Validate the input
     if not name or not email or not phone or not address or not website or not skills or not education or not work_experience or not about_me:
         messagebox.showerror("Error", "Please fill in all fields")
         return
+
+    cv = PDFCV()
+    cv.generate_cv(name, email, phone, address, website, skills, education, work_experience, about_me)
+
 
 
 root = Tk()
