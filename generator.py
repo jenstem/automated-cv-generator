@@ -57,8 +57,16 @@ class PDFCV(FPDF):
         # Display details of education
         self.set_font("Arial", style="", size=12)
         for education_item in education:
-            self.cell(0, 5, "{}:  {}, {}".format(experience["degree"], experience["school"], experience["year"]), new_x="LMARGIN", new_y="NEXT", align="L")
+            self.cell(0, 5, "{}:  {}, {}".format(education_item["degree"], education_item["school"], education_item["year"]), new_x="LMARGIN", new_y="NEXT", align="L")
 
+        # Display about me
+        self.ln(10)
+        self.set_font("Arial", style="B", size=16)
+        self.cell(0, 10, "About Me", new_x="LMARGIN", new_y="NEXT", align="L")
+
+        # Display details of about me
+        self.set_font("Arial", style="", size=12)
+        self.multi_cell(0, 5, about_me, new_x="LMARGIN", new_y="NEXT", align="L")
 
         self.output("cv1.pdf")
 
@@ -147,7 +155,7 @@ entry_skills.pack()
 
 
 # Education
-label_education = Label(root, text="Education (Enter one per line in format 'Degree, School, Year')")
+label_education = Label(root, text="Education (Enter one per line in format 'Degree: School, Year')")
 label_education.pack()
 entry_education = Text(root, height=5)
 entry_education.pack()
