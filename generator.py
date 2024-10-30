@@ -5,10 +5,27 @@ from fpdf import FPDF
 
 
 class PDFCV(FPDF):
+    """
+    Adds a header to the PDF with the portfolio site image.
+    """
     def header(self):
         self.image("mywebsite.png", 10, 8, 33, title="Portfolio Site")
 
     def generate_cv(self, name, email, phone, address, skills, education, work_experience, about_me):
+        """
+        Generate the CV with the provided personal information, skills, education, 
+        work experience and about me section.
+
+        Parameters:
+            name (str): The name of the individual.
+            email (str): The email address of the individual
+            phone (str): The phone number of the individual
+            address (str): The address of the individual
+            skills (list): A list of skills.
+            education (list): A list of education details.
+            work_experience (list): A list of work experience details.
+            about_me (str): A brief description about the individual.
+        """
         self.add_page()
         self.ln(20)
 
@@ -68,8 +85,10 @@ class PDFCV(FPDF):
         self.output("cv1.pdf")
 
 
-# Function to generate CV
 def generate_cv():
+    """
+    Gathers user input from the GUI and generates a CV.
+    """
     name = entry_name.get()
     email = entry_email.get()
     phone = entry_phone.get()
